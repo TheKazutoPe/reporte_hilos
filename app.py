@@ -129,6 +129,7 @@ def nuevo_enlace():
     origen_a = safe_str(request.form.get("origen_a"))
     sala_a = safe_str(request.form.get("sala_a"))
     rack_a = safe_str(request.form.get("rack_a"))
+posicion_a = safe_str(request.form.get("posicion_a"))
 
     # Sugerencia de A/B desde el nombre del enlace (split por "-")
     sA, sB = split_sites(nombre_enlace)
@@ -152,6 +153,7 @@ def nuevo_enlace():
         "origen_a": origen_a or None,
         "sala_a": sala_a or None,
         "rack_a": rack_a or None,
+        "posicion_a": posicion_a or None,
         "origen_b": origen_b or None,  # sugerido
         "sala_b": None,
         "rack_b": None,
@@ -198,12 +200,14 @@ def completar_extremo_b(enlace_id):
     origen_b = safe_str(request.form.get("origen_b"))
     sala_b = safe_str(request.form.get("sala_b"))
     rack_b = safe_str(request.form.get("rack_b"))
+    posicion_b = safe_str(request.form.get("posicion_b"))
 
     try:
         supabase.table("enlaces").update({
             "origen_b": origen_b or None,
             "sala_b": sala_b or None,
             "rack_b": rack_b or None,
+            "posicion_b": posicion_b or None,
             "completado_b": True
         }).eq("id", enlace_id).execute()
     except Exception as e:
@@ -260,6 +264,7 @@ def editar_enlace(enlace_id):
     origen_a = safe_str(request.form.get("origen_a"))
     sala_a = safe_str(request.form.get("sala_a"))
     rack_a = safe_str(request.form.get("rack_a"))
+posicion_a = safe_str(request.form.get("posicion_a"))
 
     origen_b = safe_str(request.form.get("origen_b"))
     sala_b = safe_str(request.form.get("sala_b"))
@@ -444,13 +449,14 @@ def build_xlsx(enlace: dict, hilos: list[dict]) -> bytes:
         )
 
     # Summary box helper
-    def write_box(top_row: int, title: str, origin: str, sala: str, cable: str, rack: str):
+    def write_box(top_row: int, title: str, origin: str, sala: str, cable: str, rack: str, posicion: str):
         labels = [
             ("ENLACE:", safe_str(enlace.get("nombre_enlace"))),
             ("ORIGEN", origin),
             ("SALA", sala),
             ("CABLE", cable),
             ("RACK", rack),
+            ("POSICIÓN", posicion),
             ("CAPACIDAD", safe_str(enlace.get("capacidad"))),
             ("LONGITUD TRAMO TOTAL", safe_str(enlace.get("longitud_total"))),
         ]
@@ -478,6 +484,7 @@ def build_xlsx(enlace: dict, hilos: list[dict]) -> bytes:
         sala=safe_str(enlace.get("sala_a")),
         cable=safe_str(enlace.get("tipo_cable")),
         rack=safe_str(enlace.get("rack_a")),
+        posicion=safe_str(enlace.get("posicion_a")),
     )
     write_box(
         top_row=13,
@@ -486,6 +493,7 @@ def build_xlsx(enlace: dict, hilos: list[dict]) -> bytes:
         sala=safe_str(enlace.get("sala_b")),
         cable=safe_str(enlace.get("tipo_cable")),
         rack=safe_str(enlace.get("rack_b")),
+        posicion=safe_str(enlace.get("posicion_b")),
     )
 
     # Save bytes

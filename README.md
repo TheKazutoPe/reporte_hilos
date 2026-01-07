@@ -30,3 +30,10 @@ Abre: http://localhost:5000
 
 ## 4) Actualizar lista de enlaces
 Reemplaza `data/enlaces_programados.json` por uno nuevo (o vuelve a generar desde tu Excel).
+
+## Agregar campo POSICIÓN (si ya tenías tablas creadas)
+En Supabase SQL Editor ejecuta:
+```sql
+alter table public.enlaces add column if not exists posicion_a text;
+alter table public.enlaces add column if not exists posicion_b text;
+```

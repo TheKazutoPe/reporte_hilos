@@ -79,6 +79,10 @@
                   <label class="form-label">Rack A</label>
                   <input class="form-control" name="rack_a" value="{{ enlace.rack_a or '' }}">
                 </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Posición A</label>
+                  <input class="form-control" name="posicion_a" value="{{ enlace.posicion_a or '' }}">
+                </div>
               </div>
             </div>
           </div>
@@ -98,6 +102,10 @@
                 <div class="col-12 col-md-4">
                   <label class="form-label">Rack B</label>
                   <input class="form-control" name="rack_b" value="{{ enlace.rack_b or '' }}">
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Posición B</label>
+                  <input class="form-control" name="posicion_b" value="{{ enlace.posicion_b or '' }}">
                 </div>
               </div>
               <div class="form-text mt-2">Nota: si completas B por aquí, igual puedes ir a “Completar B” si está pendiente.</div>

@@ -16,10 +16,12 @@ create table public.enlaces (
     origen_a text,
     sala_a text,
     rack_a text,
+    posicion_a text,
 
     origen_b text,
     sala_b text,
     rack_b text,
+    posicion_b text,
 
     completado_b boolean default false,
     creado_at timestamp with time zone default now()
