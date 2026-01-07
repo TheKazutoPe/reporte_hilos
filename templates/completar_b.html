@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% block title %}Completar Extremo B - Validación{% endblock %}
+
+{% block content %}
+<datalist id="sitiosList">
+  {% for s in sites %}
+    <option value="{{ s }}"></option>
+  {% endfor %}
+</datalist>
+
+<div class="row g-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+          <div>
+            <h5 class="mb-1">Extremo B (Interfaz Espejo)</h5>
+            <div class="small-muted">{{ enlace.nombre_enlace }} · Capacidad: {{ enlace.capacidad }}</div>
+          </div>
+          <div class="d-flex gap-2">
+            <a class="btn btn-light btn-sm" href="{{ url_for('dashboard') }}">← Volver</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('editar_enlace', enlace_id=enlace.id) }}">Editar todo</a>
+          </div>
+        </div>
+        <hr class="my-3">
+
+        <form method="post" class="row g-3">
+          <div class="col-12">
+            <div class="row g-3">
+              <div class="col-12 col-lg-6">
+                <div class="p-3 border rounded-3 bg-light">
+                  <div class="fw-semibold mb-2">Extremo A (Solo lectura)</div>
+                  <div class="row g-2">
+                    <div class="col-12 col-md-4">
+                      <div class="small-muted">Origen A</div>
+                      <div>{{ enlace.origen_a or "—" }}</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="small-muted">Sala A</div>
+                      <div>{{ enlace.sala_a or "—" }}</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="small-muted">Rack A</div>
+                      <div>{{ enlace.rack_a or "—" }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-6">
+                <div class="p-3 border rounded-3">
+                  <div class="fw-semibold mb-2">Extremo B (Completar)</div>
+                  <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                      <label class="form-label">Origen (Sitio B)</label>
+                      <input class="form-control" list="sitiosList" name="origen_b" value="{{ enlace.origen_b or '' }}" />
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label">Sala B</label>
+                      <input class="form-control" name="sala_b" value="{{ enlace.sala_b or '' }}" />
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label class="form-label">Rack B</label>
+                      <input class="form-control" name="rack_b" value="{{ enlace.rack_b or '' }}" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-sm align-middle">
+                <thead>
+                  <tr>
+                    <th style="width: 90px;">Fibra</th>
+                    <th style="min-width: 340px;">Descripción A</th>
+                    <th style="min-width: 340px;">Descripción B (Ingresar)</th>
+                    <th style="width: 90px;">Fibra</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for h in hilos %}
+                  <tr>
+                    <td class="fw-semibold text-center">{{ h.nro_hilo }}</td>
+                    <td>{{ h.desc_a or "" }}</td>
+                    <td>
+                      <textarea class="form-control form-control-sm" name="desc_b_{{ h.nro_hilo }}" placeholder="Descripción del hilo {{ h.nro_hilo }} en Extremo B">{{ h.desc_b or "" }}</textarea>
+                    </td>
+                    <td class="fw-semibold text-center">{{ h.nro_hilo }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-12 d-flex justify-content-end gap-2">
+            <a class="btn btn-light" href="{{ url_for('dashboard') }}">Cancelar</a>
+            <button class="btn btn-success" type="submit">Finalizar y Validar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

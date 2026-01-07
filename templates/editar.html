@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+{% block title %}Editar Enlace - Validación{% endblock %}
+
+{% block content %}
+<datalist id="sitiosList">
+  {% for s in sites %}
+    <option value="{{ s }}"></option>
+  {% endfor %}
+</datalist>
+
+<form method="post" class="row g-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+          <div>
+            <h5 class="mb-1">Editar Enlace</h5>
+            <div class="small-muted">Puedes corregir cabecera, Extremos A/B y descripciones.</div>
+          </div>
+          <div class="d-flex gap-2">
+            <a class="btn btn-light btn-sm" href="{{ url_for('dashboard') }}">← Volver</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('ver_reporte', enlace_id=enlace.id) }}">Ver reporte</a>
+            <a class="btn btn-outline-success btn-sm" href="{{ url_for('export_xlsx', enlace_id=enlace.id) }}">Exportar</a>
+          </div>
+        </div>
+
+        <hr class="my-3">
+
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label">Nombre del Enlace</label>
+            <select class="form-select" name="nombre_enlace_sel" id="nombre_enlace_sel">
+              <option value="">(Mantener actual)</option>
+              {% for g in link_groups %}
+                <optgroup label="{{ g.label }}">
+                  {% for it in g['items'] %}
+                    <option value="{{ it['value'] }}">{{ it['label'] }}</option>
+                  {% endfor %}
+                </optgroup>
+              {% endfor %}
+            </select>
+            <input class="form-control mt-2" name="nombre_enlace_manual" placeholder="(Opcional) Nombre manual del enlace" />
+            <div class="form-text">Actual: <span class="fw-semibold">{{ enlace.nombre_enlace }}</span></div>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Tipo de Cable</label>
+            <input class="form-control" name="tipo_cable" value="{{ enlace.tipo_cable or '' }}" />
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Capacidad (N hilos)</label>
+            <input class="form-control" name="capacidad" type="number" min="1" max="288" value="{{ enlace.capacidad or 24 }}" />
+            <div class="form-text">Si reduces capacidad, se eliminan hilos mayores a N.</div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label class="form-label">Longitud Tramo Total</label>
+            <input class="form-control" name="longitud_total" value="{{ enlace.longitud_total or '' }}" />
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row g-3">
+          <div class="col-12 col-lg-6">
+            <div class="p-3 border rounded-3 bg-light">
+              <div class="fw-semibold mb-2">Extremo A</div>
+              <div class="row g-3">
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Origen A</label>
+                  <input class="form-control" list="sitiosList" name="origen_a" value="{{ enlace.origen_a or '' }}">
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Sala A</label>
+                  <input class="form-control" name="sala_a" value="{{ enlace.sala_a or '' }}">
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Rack A</label>
+                  <input class="form-control" name="rack_a" value="{{ enlace.rack_a or '' }}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="p-3 border rounded-3">
+              <div class="fw-semibold mb-2">Extremo B</div>
+              <div class="row g-3">
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Origen B</label>
+                  <input class="form-control" list="sitiosList" name="origen_b" value="{{ enlace.origen_b or '' }}">
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Sala B</label>
+                  <input class="form-control" name="sala_b" value="{{ enlace.sala_b or '' }}">
+                </div>
+                <div class="col-12 col-md-4">
+                  <label class="form-label">Rack B</label>
+                  <input class="form-control" name="rack_b" value="{{ enlace.rack_b or '' }}">
+                </div>
+              </div>
+              <div class="form-text mt-2">Nota: si completas B por aquí, igual puedes ir a “Completar B” si está pendiente.</div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="mb-0">Detalle de Hilos (A vs B)</h6>
+          <span class="small-muted">Edita cualquier hilo si es necesario.</span>
+        </div>
+
+        <div class="table-responsive mt-3">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th style="width: 80px;">Fibra</th>
+                <th>Descripción A</th>
+                <th>Descripción B</th>
+                <th style="width: 80px;">Fibra</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for h in hilos %}
+              <tr>
+                <td class="fw-semibold text-center">{{ h.nro_hilo }}</td>
+                <td><textarea class="form-control form-control-sm" name="desc_a_{{ h.nro_hilo }}">{{ h.desc_a or '' }}</textarea></td>
+                <td><textarea class="form-control form-control-sm" name="desc_b_{{ h.nro_hilo }}">{{ h.desc_b or '' }}</textarea></td>
+                <td class="fw-semibold text-center">{{ h.nro_hilo }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <a class="btn btn-light" href="{{ url_for('dashboard') }}">Cancelar</a>
+          <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard - Validación{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <h5 class="mb-0">Pendientes (Incompletos)</h5>
+          <span class="badge badge-soft">{{ incompletos|length }}</span>
+        </div>
+        <p class="small-muted mb-3">Enlaces creados en Extremo A y pendientes de completar Extremo B.</p>
+
+        {% if incompletos %}
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>Enlace</th>
+                  <th>Cap.</th>
+                  <th>Creado</th>
+                  <th class="text-end">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for e in incompletos %}
+                <tr>
+                  <td>
+                    <div class="fw-semibold">{{ e.nombre_enlace }}</div>
+                    <div class="small-muted">{{ e.origen_a or "—" }} → {{ e.origen_b or "(B sugerido)" }}</div>
+                  </td>
+                  <td>{{ e.capacidad or "—" }}</td>
+                  <td class="small-muted">{{ (e.creado_at or "")[:19].replace("T"," ") }}</td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <a class="btn btn-outline-primary" href="{{ url_for('completar_extremo_b', enlace_id=e.id) }}">Completar B</a>
+                      <a class="btn btn-outline-secondary" href="{{ url_for('editar_enlace', enlace_id=e.id) }}">Editar</a>
+                      <a class="btn btn-outline-success" href="{{ url_for('export_xlsx', enlace_id=e.id) }}">Exportar</a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <div class="text-muted">No hay enlaces pendientes.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <h5 class="mb-0">Validados</h5>
+          <span class="badge badge-soft">{{ validados|length }}</span>
+        </div>
+        <p class="small-muted mb-3">Enlaces con Extremo A y B completados (reporte comparativo).</p>
+
+        {% if validados %}
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>Enlace</th>
+                  <th>Cap.</th>
+                  <th>Creado</th>
+                  <th class="text-end">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for e in validados %}
+                <tr>
+                  <td>
+                    <div class="fw-semibold">{{ e.nombre_enlace }}</div>
+                    <div class="small-muted">{{ e.origen_a or "—" }} ⇄ {{ e.origen_b or "—" }}</div>
+                  </td>
+                  <td>{{ e.capacidad or "—" }}</td>
+                  <td class="small-muted">{{ (e.creado_at or "")[:19].replace("T"," ") }}</td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <a class="btn btn-outline-secondary" href="{{ url_for('ver_reporte', enlace_id=e.id) }}">Ver</a>
+                      <a class="btn btn-outline-secondary" href="{{ url_for('editar_enlace', enlace_id=e.id) }}">Editar</a>
+                      <a class="btn btn-outline-success" href="{{ url_for('export_xlsx', enlace_id=e.id) }}">Exportar</a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <div class="text-muted">Aún no hay enlaces validados.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,250 @@
+{
+  "groups": [
+    {
+      "label": "ANILLO ESTE",
+      "items": [
+        {
+          "label": "POLO1 - ZARATE",
+          "value": "ANILLO ESTE | POLO1 - ZARATE"
+        },
+        {
+          "label": "ZARATE - SANTA ANITA",
+          "value": "ANILLO ESTE | ZARATE - SANTA ANITA"
+        },
+        {
+          "label": "SANTA ANITA - LA MOLINA",
+          "value": "ANILLO ESTE | SANTA ANITA - LA MOLINA"
+        },
+        {
+          "label": "LA MOLINA - CAMACHO",
+          "value": "ANILLO ESTE | LA MOLINA - CAMACHO"
+        },
+        {
+          "label": "CAMACHO - MONTERICO",
+          "value": "ANILLO ESTE | CAMACHO - MONTERICO"
+        },
+        {
+          "label": "MONTERICO AVIACION",
+          "value": "ANILLO ESTE | MONTERICO AVIACION"
+        },
+        {
+          "label": "AVIACION - HIGUERETA",
+          "value": "ANILLO ESTE | AVIACION - HIGUERETA"
+        },
+        {
+          "label": "AVIACION  - POLO 1",
+          "value": "ANILLO ESTE | AVIACION  - POLO 1"
+        },
+        {
+          "label": "HIGUERETA  - SAN LUIS",
+          "value": "ANILLO ESTE | HIGUERETA  - SAN LUIS"
+        },
+        {
+          "label": "SAN LUIS - MOTERRICO",
+          "value": "ANILLO ESTE | SAN LUIS - MOTERRICO"
+        },
+        {
+          "label": "HIGUERETA - COTAMBAMBAS",
+          "value": "ANILLO ESTE | HIGUERETA - COTAMBAMBAS"
+        },
+        {
+          "label": "HIGUERETA - TELEPUERTO",
+          "value": "ANILLO ESTE | HIGUERETA - TELEPUERTO"
+        }
+      ]
+    },
+    {
+      "label": "ANILLO NORTE",
+      "items": [
+        {
+          "label": "AEROPUERTO - LOS OLIVOS",
+          "value": "ANILLO NORTE | AEROPUERTO - LOS OLIVOS"
+        },
+        {
+          "label": "AEROPUERTO - COLONIAL",
+          "value": "ANILLO NORTE | AEROPUERTO - COLONIAL"
+        },
+        {
+          "label": "COLONIAL - COTABAMBAS",
+          "value": "ANILLO NORTE | COLONIAL - COTABAMBAS"
+        },
+        {
+          "label": "COTABAMBAS - ZARATE",
+          "value": "ANILLO NORTE | COTABAMBAS - ZARATE"
+        },
+        {
+          "label": "ZARATE - INGENIERIA",
+          "value": "ANILLO NORTE | ZARATE - INGENIERIA"
+        },
+        {
+          "label": "INGENIERIA - SANTA LUZMILA",
+          "value": "ANILLO NORTE | INGENIERIA - SANTA LUZMILA"
+        },
+        {
+          "label": "SANTA LUZMILA - LOS OLIVOS",
+          "value": "ANILLO NORTE | SANTA LUZMILA - LOS OLIVOS"
+        },
+        {
+          "label": "COTABAMBAS - POLO 1",
+          "value": "ANILLO NORTE | COTABAMBAS - POLO 1"
+        },
+        {
+          "label": "AEOPUERTO - VENTANILLA",
+          "value": "ANILLO NORTE | AEOPUERTO - VENTANILLA"
+        },
+        {
+          "label": "VENTANILLA - HIJOS DE JERUSALEN",
+          "value": "ANILLO NORTE | VENTANILLA - HIJOS DE JERUSALEN"
+        },
+        {
+          "label": "HIJOS DE JERUSALEN - CHOQUE",
+          "value": "ANILLO NORTE | HIJOS DE JERUSALEN - CHOQUE"
+        }
+      ]
+    },
+    {
+      "label": "ANILLO OESTE",
+      "items": [
+        {
+          "label": "AEROPUERTO - CALLAO",
+          "value": "ANILLO OESTE | AEROPUERTO - CALLAO"
+        },
+        {
+          "label": "CALLO - LA PUNTA",
+          "value": "ANILLO OESTE | CALLO - LA PUNTA"
+        },
+        {
+          "label": "LA PUNTA - SAN MIGUEL",
+          "value": "ANILLO OESTE | LA PUNTA - SAN MIGUEL"
+        },
+        {
+          "label": "SAN MIGUEL - SAN FELIPE 1",
+          "value": "ANILLO OESTE | SAN MIGUEL - SAN FELIPE 1"
+        },
+        {
+          "label": "SAN FELIPE 1 - SAN FELIPE 2",
+          "value": "ANILLO OESTE | SAN FELIPE 1 - SAN FELIPE 2"
+        },
+        {
+          "label": "SAN FELIPE - COTABAMBAS",
+          "value": "ANILLO OESTE | SAN FELIPE - COTABAMBAS"
+        },
+        {
+          "label": "SAN FELIPE 2 - TORRE6 - POLO 1",
+          "value": "ANILLO OESTE | SAN FELIPE 2 - TORRE6 - POLO 1"
+        },
+        {
+          "label": "AEROPUERTO - POLO 1",
+          "value": "ANILLO OESTE | AEROPUERTO - POLO 1"
+        }
+      ]
+    },
+    {
+      "label": "ANILLO SUR",
+      "items": [
+        {
+          "label": "LURIN - TELEPUERTO - 48SM",
+          "value": "ANILLO SUR | LURIN - TELEPUERTO - 48SM"
+        },
+        {
+          "label": "LURIN - TELEPUERTO -  96SM",
+          "value": "ANILLO SUR | LURIN - TELEPUERTO -  96SM"
+        },
+        {
+          "label": "SAN JUAN  - CHORRILLOS",
+          "value": "ANILLO SUR | SAN JUAN  - CHORRILLOS"
+        },
+        {
+          "label": "SAN JUAN  - TELPUERTO",
+          "value": "ANILLO SUR | SAN JUAN  - TELPUERTO"
+        },
+        {
+          "label": "SAN JUAN - POLO 2",
+          "value": "ANILLO SUR | SAN JUAN - POLO 2"
+        },
+        {
+          "label": "CHORRILLOS - OCHARAN",
+          "value": "ANILLO SUR | CHORRILLOS - OCHARAN"
+        },
+        {
+          "label": "OCHARAN - HIGUERETA",
+          "value": "ANILLO SUR | OCHARAN - HIGUERETA"
+        },
+        {
+          "label": "TELPUERTO -POLO 2",
+          "value": "ANILLO SUR | TELPUERTO -POLO 2"
+        },
+        {
+          "label": "POLO 2 - POLO 1",
+          "value": "ANILLO SUR | POLO 2 - POLO 1"
+        },
+        {
+          "label": "AEROPUERTO - POLO 1",
+          "value": "ANILLO SUR | AEROPUERTO - POLO 1"
+        },
+        {
+          "label": "AEROPUERTO  - PAMPA LIBRE",
+          "value": "ANILLO SUR | AEROPUERTO  - PAMPA LIBRE"
+        },
+        {
+          "label": "TELEPUERTO  - ASIA",
+          "value": "ANILLO SUR | TELEPUERTO  - ASIA"
+        },
+        {
+          "label": "AERIPUETO - LA MILLA",
+          "value": "ANILLO SUR | AERIPUETO - LA MILLA"
+        },
+        {
+          "label": "SANTA ANITA  - CASAPALCA",
+          "value": "ANILLO SUR | SANTA ANITA  - CASAPALCA"
+        }
+      ]
+    }
+  ],
+  "sites": [
+    "48SM",
+    "96SM",
+    "AEOPUERTO",
+    "AERIPUETO",
+    "AEROPUERTO",
+    "ASIA",
+    "AVIACION",
+    "CALLAO",
+    "CALLO",
+    "CAMACHO",
+    "CASAPALCA",
+    "CHOQUE",
+    "CHORRILLOS",
+    "COLONIAL",
+    "COTABAMBAS",
+    "COTAMBAMBAS",
+    "HIGUERETA",
+    "HIJOS DE JERUSALEN",
+    "INGENIERIA",
+    "LA MILLA",
+    "LA MOLINA",
+    "LA PUNTA",
+    "LOS OLIVOS",
+    "LURIN",
+    "MONTERICO",
+    "MONTERICO AVIACION",
+    "MOTERRICO",
+    "OCHARAN",
+    "PAMPA LIBRE",
+    "POLO 1",
+    "POLO 2",
+    "POLO1",
+    "SAN FELIPE",
+    "SAN FELIPE 1",
+    "SAN FELIPE 2",
+    "SAN JUAN",
+    "SAN LUIS",
+    "SAN MIGUEL",
+    "SANTA ANITA",
+    "SANTA LUZMILA",
+    "TELEPUERTO",
+    "TELPUERTO",
+    "VENTANILLA",
+    "ZARATE"
+  ]
+}

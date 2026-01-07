@@ -1,0 +1,165 @@
+{% extends "layout.html" %}
+{% block title %}Nuevo Enlace - Validación{% endblock %}
+
+{% block content %}
+<form method="post" class="row g-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="mb-1">1) Ficha Técnica (Cabecera)</h5>
+        <p class="small-muted mb-3">Crea el enlace y registra Extremo A. Quedará “Incompleto” hasta completar B.</p>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label">Nombre del Enlace *</label>
+
+            <select class="form-select" name="nombre_enlace_sel" id="nombre_enlace_sel" required>
+              <option value="">Seleccione...</option>
+              {% for g in link_groups %}
+                <optgroup label="{{ g.label }}">
+                  {% for it in g['items'] %}
+                    <option value="{{ it['value'] }}">{{ it['label'] }}</option>
+                  {% endfor %}
+                </optgroup>
+              {% endfor %}
+            </select>
+
+            <div class="form-text">Si no está en la lista, escribe uno manualmente abajo.</div>
+
+            <input class="form-control mt-2" name="nombre_enlace_manual" placeholder="(Opcional) Nombre manual del enlace" />
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Tipo de Cable</label>
+            <input class="form-control" name="tipo_cable" placeholder="Ej: DORSAL / ADSS / OPGW / SM..." />
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label class="form-label">Capacidad (N hilos)</label>
+            <input class="form-control" id="capacidad" name="capacidad" type="number" min="1" max="288" value="{{ capacidad }}" />
+            <div class="form-text">Define cuántos hilos tendrá la tabla (1..N).</div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label class="form-label">Longitud Tramo Total</label>
+            <input class="form-control" name="longitud_total" placeholder="Ej: 20000 / 3.2 km" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <datalist id="sitiosList">
+    {% for s in sites %}
+      <option value="{{ s }}"></option>
+    {% endfor %}
+  </datalist>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="mb-1">2) Extremo A</h5>
+        <p class="small-muted mb-3">Origen A y datos del primer sitio. El sistema puede sugerir A/B según el enlace seleccionado.</p>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-4">
+            <label class="form-label">Origen (Sitio A)</label>
+            <input class="form-control" list="sitiosList" id="origen_a" name="origen_a" placeholder="Ej: ZARATE" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">Sala A</label>
+            <input class="form-control" name="sala_a" placeholder="Ej: SALA TRANSMISIONES" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">Rack A</label>
+            <input class="form-control" name="rack_a" placeholder="Ej: A12" />
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label class="form-label">Origen B (Sugerido)</label>
+            <input class="form-control" list="sitiosList" id="origen_b_sugerido" name="origen_b_sugerido" placeholder="Se sugiere desde el enlace" />
+            <div class="form-text">Se guarda como sugerencia; se confirmará al completar Extremo B.</div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex align-items-center justify-content-between">
+          <h6 class="mb-0">Detalle de Hilos (Extremo A)</h6>
+          <span class="small-muted">Se generará según capacidad (N).</span>
+        </div>
+
+        <div class="table-responsive mt-3">
+          <table class="table table-sm align-middle" id="tablaHilos">
+            <thead>
+              <tr>
+                <th style="width: 110px;"># Hilo</th>
+                <th>Descripción Extremo A</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-end">
+          <a class="btn btn-light" href="{{ url_for('dashboard') }}">Cancelar</a>
+          <button class="btn btn-primary" type="submit">Guardar (Incompleto)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function(){
+  const capacidadEl = document.getElementById('capacidad');
+  const tbody = document.querySelector('#tablaHilos tbody');
+
+  const sel = document.getElementById('nombre_enlace_sel');
+  const origenA = document.getElementById('origen_a');
+  const origenB = document.getElementById('origen_b_sugerido');
+
+  function splitSites(value){
+    if(!value) return ["",""];
+    let ruta = value;
+    if (ruta.includes("|")) ruta = ruta.split("|")[1].trim();
+    const parts = ruta.split("-").map(s => s.trim()).filter(Boolean);
+    if (parts.length === 2) return [parts[0], parts[1]];
+    if (parts.length > 2) return [parts[0], parts[parts.length-1]];
+    return [parts[0] || "", ""];
+  }
+
+  sel.addEventListener('change', () => {
+    const [a,b] = splitSites(sel.value);
+    if (a && !origenA.value) origenA.value = a;
+    if (b && !origenB.value) origenB.value = b;
+  });
+
+  function renderRows(n){
+    tbody.innerHTML = '';
+    for (let i = 1; i <= n; i++){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="fw-semibold">${i}</td>
+        <td>
+          <input class="form-control form-control-sm" name="desc_a_${i}" placeholder="Descripción del hilo ${i} en Extremo A" />
+        </td>
+      `;
+      tbody.appendChild(tr);
+    }
+  }
+
+  function currentCap(){
+    const n = parseInt(capacidadEl.value || '24', 10);
+    if (!Number.isFinite(n) || n < 1) return 1;
+    if (n > 288) return 288;
+    return n;
+  }
+
+  capacidadEl.addEventListener('input', () => renderRows(currentCap()));
+  renderRows(currentCap());
+})();
+</script>
+{% endblock %}
