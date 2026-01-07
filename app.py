@@ -129,7 +129,7 @@ def nuevo_enlace():
     origen_a = safe_str(request.form.get("origen_a"))
     sala_a = safe_str(request.form.get("sala_a"))
     rack_a = safe_str(request.form.get("rack_a"))
-posicion_a = safe_str(request.form.get("posicion_a"))
+    posicion_a = safe_str(request.form.get("posicion_a"))
 
     # Sugerencia de A/B desde el nombre del enlace (split por "-")
     sA, sB = split_sites(nombre_enlace)
@@ -264,7 +264,7 @@ def editar_enlace(enlace_id):
     origen_a = safe_str(request.form.get("origen_a"))
     sala_a = safe_str(request.form.get("sala_a"))
     rack_a = safe_str(request.form.get("rack_a"))
-posicion_a = safe_str(request.form.get("posicion_a"))
+    posicion_a = safe_str(request.form.get("posicion_a"))
 
     origen_b = safe_str(request.form.get("origen_b"))
     sala_b = safe_str(request.form.get("sala_b"))
